@@ -35,11 +35,39 @@ test('Incorrect name check', () => {
     char.name = 'ch';
   }).toThrow();
 });
-
 test('Name check', () => {
   expect(char.name).toBe('character');
 });
-
 test('Type check', () => {
   expect(char.type).toBe('magician');
+});
+
+const char1 = new Character('character');
+char1.health = 0;
+test('Deadman methods', () => {
+  expect(() => {
+    char1.levelUp();
+  }).toThrow();
+});
+test('Deadman methods2', () => {
+  expect(() => {
+    char1.damage(10);
+  }).toThrow();
+});
+
+const char2 = new Character('character');
+char2.health = 40;
+char2.attack = 10;
+char2.defence = 10;
+
+test('LevelUp check', () => {
+  char2.levelUp();
+  expect(char2.health).toBe(100);
+  expect(char2.level).toBe(2);
+  expect(char2.defence).toBe(12);
+  expect(char2.attack).toBe(12);
+});
+test('Damage check', () => {
+  char2.damage(20);
+  expect(char2.health).toBe(82.4);
 });
